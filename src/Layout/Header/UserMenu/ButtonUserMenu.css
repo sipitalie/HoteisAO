@@ -1,0 +1,19 @@
+.User-button{
+    color: #fff;
+    height: 50px;
+    width: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    justify-items: center;
+
+}
+.User-button :hover{
+    background-color: dimgrey;
+    border-radius: 10px;
+}
+.FaUser-button{
+    
+    size: 50px;
+
+}

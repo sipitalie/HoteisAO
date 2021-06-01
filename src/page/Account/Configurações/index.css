@@ -1,0 +1,94 @@
+.class-PerfilUser{
+    display: flex;
+    /*width: 400px;*/
+    /*margin-top:10px;*/
+    height: 400px;
+    background-color:white;     
+    border-radius: 8px;
+    flex-direction: column; 
+    padding: 10px 10px;
+    box-shadow: 15px 0 20px rgba(0, 0, 0, 0.1),
+     0 -15px 20px rgba(0, 0, 0, 0.1),
+     0 15px 20px rgba(0, 0, 0, 0.1);           
+ }
+ .Dark-light-and-perfil{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+.account-perfil{
+    margin-top: 10px;
+}
+.Dark-light{
+    display: inline-block;
+    width: 100%;
+    justify-content: end;
+    align-items: center;   
+}
+input[type="checkbox"]{
+    -webkit-appearance: none;
+    position: absolute;
+    border: none;
+    margin-left: 20px;
+    width: 15px;
+    height: 15px;
+}
+.check{
+    width: 60px;
+    display: block;
+    position: relative;
+    height: 30px;
+    border-radius: 30px;
+    background: #521751;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s;    
+}
+
+.check::before{
+    position: absolute;
+    content: '';
+    top:3px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    transition:0.5s;
+}
+
+
+input[type="checkbox"]:checked ~ .check::before{
+    transform: translateX(30px);
+    background: #fff;
+}
+
+@media (min-width: 320px){
+    .class-PerfilUse{
+        height: 420px;
+        width: 310px;           
+    }   
+}
+@media (min-width: 360px){
+    .class-PerfilUse{
+        height: 420px;
+        width: 340px;           
+    }   
+}
+@media (min-width: 375px){
+    .class-PerfilUse{
+        height: 420px;
+        width: 365px;           
+    }   
+}
+@media (min-width: 760px){
+    .class-PerfilUse{
+        width: 450px;           
+    }  
+}
+@media (min-width: 1024px){
+    .class-PerfilUse{
+        width: 450px;
+        height: 450px;            
+    }  
+}

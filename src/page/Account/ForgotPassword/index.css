@@ -1,0 +1,20 @@
+.forgot-password-container{
+    width: 600px;
+    height: 300px;
+    margin-top:100px;
+    background-color:white; 
+    border-radius: 8px;
+    padding: 0 24px;             
+}
+.forgot-password div li ul p{
+    font-size: 10px;
+    text-decoration: none;
+    list-style: none;
+}
+.class-forgot-email{
+    margin-top: 10px;
+}
+/*
+  border: 1px solid #dcdce6;
+
+*/

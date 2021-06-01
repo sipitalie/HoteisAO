@@ -1,0 +1,67 @@
+.notification-user{
+    height: auto;
+    background: white;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top:62px;
+    left: 100%;
+    width: 60%;
+    max-width: 360px;
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out; 
+}
+.notification-user.open{
+    transform: translateX(-100%);
+}
+.notification-user header{
+    list-style: none;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items:center;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(74, 20, 82, 0.466);
+    
+}
+.notification-user header p{
+    font-size: 1rem;
+    text-decoration: none; 
+}
+.notification-user header span{
+    margin-left: 62%;
+}
+.notification-user .notification-div-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;       
+}
+.notification-div{
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    transition: 0.5s;
+    transition-property:  background;
+    margin-bottom: 10px;
+}
+.left-notification{
+    display: flex;
+    width: 20%;
+}
+.right-notification{
+    display: flex;
+    width: 80%;
+}
+.notification-user .notifications-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;  
+}
+.right-notification :hover{
+    background:gainsboro ;
+}

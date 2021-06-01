@@ -1,0 +1,13 @@
+.Changepassword-container{
+    display: flex;
+    width:150px;
+    margin-top:10px;
+    height: auto;
+    background-color:white;     
+    border-radius: 8px;
+    flex-direction: column; 
+    padding: 10px 10px;
+    box-shadow: 15px 0 20px rgba(0, 0, 0, 0.1),
+     0 -15px 20px rgba(0, 0, 0, 0.1),
+     0 15px 20px rgba(0, 0, 0, 0.1);           
+ }
