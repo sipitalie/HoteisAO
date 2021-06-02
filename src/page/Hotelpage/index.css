@@ -63,6 +63,24 @@
 }
 .class-content{
     width: 70%;
+   
+}
+.class-content-name{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    
+}
+.class-content div span{
+    display: flex;
+    width: 1.5rem;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    margin-left: 1rem; 
+}
+.class-content div span a{
+    text-decoration: none;   
 }
 .Menu-perfil{
     display: flex;
@@ -73,6 +91,7 @@
     text-align: center;  
     height: 3.125rem;
     transition: all 3s ease-in;
+    
 }
 
 .navMenu ul{
@@ -85,6 +104,10 @@
     height: 3.125rem;
     z-index: 10;
     transition: all .5s ease-in;
+}
+.dercricãoHotel{
+   display: flex;
+   justify-content: center; 
 }
 .navMenu ul li{
    margin-left: 10px;

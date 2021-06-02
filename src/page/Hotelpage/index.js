@@ -1,6 +1,7 @@
 import { useParams, Link, Route, useRouteMatch } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaPencilAlt} from "react-icons/fa";
 
 import { alojamentos_details } from '../../store/fetchActions';
 
@@ -54,15 +55,7 @@ export default function HotelPage() {
 
     const alojamentodetail = useSelector((state) => (state.Alojamento));
     alojamentodetail.map((alojamento, index) => { return dados = alojamento })
-    useEffect(()=>{
-        console.log(dados)
-
-    },[])
-
-
-
-
-
+    
     return (
         <div className="class-PageHotel">
             <header className="header-perfil">
@@ -71,11 +64,14 @@ export default function HotelPage() {
                     <ImgComp src={h2} />
                 </div>
                 <div className="class-content">
-                    <div><h1>{dados.nome}</h1></div>
+                    <div className="class-content-name">
+                        <h1>{dados.nome}</h1>
+                        <span>{IsAdminHotel(dados.owner) && <Link to={`/change${match.url}`}><FaPencilAlt color="#521751" size='1.5rem'/></Link>}</span>
+                    </div>
                     <STAR star={dados.Estrela} />
                     <div>Tipo: {dados.Type_Alojamento}</div>
                     <h4 className="class-cidade">{dados.pais}, {dados.Provincia}, {dados.cidade}</h4>
-                    <div className="dercricão"><p className="dercricão-info">{dados.linha}</p></div>
+                    <div className="dercricãoHotel"><p className="dercricão-info">{dados.linha}</p></div>
                 </div>
             </header>
             <div className={navMenu ? 'navMenu active' : 'navMenu'}>

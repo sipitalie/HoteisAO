@@ -1,0 +1,151 @@
+.class-change-alojamento{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color:white; 
+    border-radius: 0.5rem;  
+    width: 28rem;           
+}
+.class-change{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top:3.75rem;
+    padding: 0 1rem 0 1rem;
+    
+              
+}
+.class-icon-change{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    justify-items: center; 
+   
+   
+}
+.class-icon-change h1{
+    text-decoration: none;
+    align-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+   
+}
+.class-name-register{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.class-tipo-estrelas{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+
+}
+.class-tipo-estrelas input{
+    width: 30%;
+    margin-top: 10px;
+   
+}
+#selectclasstipo{
+    margin-right: 0.5rem;
+
+}
+.class-pais-provincia-Cidade{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.class-pais-provincia-Cidade input{
+    width: 30%;
+    margin-top: 10px;
+}
+.class-cordenadas{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.class-cordenadas input{
+    width: 45%;
+    margin-top: 10px;
+}
+.button-class {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    
+
+}
+
+.button-class button{
+    width: 50%;
+    height: 40px;
+    background: #521750;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 25px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 40px;
+    transition: filter 0.2s;
+    cursor: pointer;
+
+}
+.class-checkbox{
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: space-around;   
+    margin-top: 10px;
+    position: relative;
+    
+}
+.class-checkbox p{
+
+    width: 70%; 
+    
+}
+.class-endereço-Descrição{
+    margin-top: 1rem;
+}
+#checboxTrue{
+    width: 16px;
+    height: 16px;
+    color:#333;
+    -webkit-appearance: checkbox;
+    border: 1px solid #dcdce6;
+    color: #fff;
+    background: #521750;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+input{
+    width: 100%;
+    height: 40px;
+    color:#333;
+    border: 1px solid #dcdce6;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+select{
+    width: 100%;
+    height: 40px;
+    color:#333;
+    border: 1px solid #dcdce6;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+
+.button-class button:hover{
+    filter: brightness(80%);
+}

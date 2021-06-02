@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 //import { useSelector } from 'react-redux';
 
 
@@ -16,29 +16,31 @@ import Ajuda from './page/Ajuda'
 import Dashboard from './page/Dashboard'
 import RegisterAlojamento from './page/RegisterAlojamento'
 import SendPhotosToTheBedroomGallery from './components/Upload/Bedroom_Photo_Gallery/';
+import ChangeAlojamento from './page/Hotelpage/ChangeAloamento'
 
 
 
-function PrivateRoute({ component: Component, ...rest}){
+function PrivateRoute({ component: Component, ...rest }) {
     //const {isAutenticated} = useSelector(state=> state.auth)
-    const isAutenticated= ()=>localStorage.getItem('token');
+    const isAutenticated = () => localStorage.getItem('token');
 
-    return(
-        <Route {...rest} render={(props)=>(
-                isAutenticated() ? ( <Component {...props}/>):(<Redirect to = {{pathname :'/login', state:{from : props.location}}}/>)
-                )}/>
+    return (
+        <Route {...rest} render={(props) => (
+            isAutenticated() ? (<Component {...props} />) : (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)
+        )} />
     )
 }
 
 
-const  Routes = () =>(
+const Routes = () => (
     <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route path='/login' component={Login}/>
-        <Route path='/register' component={Register}/>
-        <Route path='/eventos' component={Eventos}/>
-        <Route path='/promoções' component={Promoções}/>
-        <Route path='/hotelpage/:id' component={HotelPage}/>
+        <Route exact path='/' component={Home} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route path='/eventos' component={Eventos} />
+        <Route path='/promoções' component={Promoções} />
+        <Route path='/hotelpage/:id' component={HotelPage} />
+
 
         {/*
         
@@ -50,14 +52,16 @@ const  Routes = () =>(
         <Route path='/ajuda' component={Ajuda}/>
         <Route path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery}/> 
         */}
-        <PrivateRoute path='/Dashboard' component={Dashboard}/>
-        <PrivateRoute path='/account' component={Account}/>
-        <PrivateRoute path='/ForgotPassword' component={ForgotPassword}/>
-        <PrivateRoute path='/sendfeedback' component={Feedback}/>
-        <PrivateRoute path='/register_alojamento' component={RegisterAlojamento}/>
-        <PrivateRoute path='/ajuda' component={Ajuda}/>
-        <PrivateRoute path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery}/>  
-        
-    </Switch> 
+        <PrivateRoute path='/Dashboard' component={Dashboard} />
+        <PrivateRoute path='/account' component={Account} />
+        <PrivateRoute path='/ForgotPassword' component={ForgotPassword} />
+        <PrivateRoute path='/sendfeedback' component={Feedback} />
+        <PrivateRoute path='/register_alojamento' component={RegisterAlojamento} />
+        <PrivateRoute path='/ajuda' component={Ajuda} />
+        <PrivateRoute path='/change/hotelpage/:id/' component={ChangeAlojamento} />
+        <PrivateRoute path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery} />
+
+
+    </Switch>
 );
 export default Routes;
