@@ -136,8 +136,7 @@ export default function HotelPage() {
                     return (
                         <>
                             <div>Mapa</div>
-
-                            <Mapa dados={dados} />
+                            <Mapa dadosmapa={dados} />
                         </>
                     )
                 }} />

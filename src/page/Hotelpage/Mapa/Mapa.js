@@ -1,25 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import L, { LatLngExpression } from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import './index.css'
 import "leaflet/dist/leaflet.css";
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-import { alojamentos_details } from '../../../store/fetchActions';
 //, 
 
 
-export const Mapa = ({ dados }) => {
-
-
+export function Mapa({ dadosmapa }) {
     const [center, setCenter] = useState({ lat: -11.2135241, lng: 17.8770032 });
-
-    const [positionMarker, setPositionMarker] = useState([])
+    const [positionAlojamento, setPositionAlojamento] = useState({ lat: -11.2135241, lng: 17.8770032 })
     useEffect(() => {
-        setPositionMarker([dados.latitude, dados.longitude])
-        console.log(positionMarker)
+        if (localStorage.hasOwnProperty("latitude") && localStorage.hasOwnProperty("longitude")) {
+
+            console.log('ola1')
+            const lati = localStorage.getItem("latitude")
+            const long = localStorage.getItem("longitude")
+            if ((typeof (dadosmapa.latitude) !== undefined) && lati !== dadosmapa.latitude && long !== dadosmapa.longitude) {
+                localStorage.setItem('latitude', dadosmapa.latitude)
+                localStorage.setItem('longitude', dadosmapa.longitude)
+                setPositionAlojamento({ lat: dadosmapa.latitude, lng: dadosmapa.longitude })
+
+            } else {
+                console.log('ola3')
+                setPositionAlojamento({
+                    lat: lati,
+                    lng: long
+                })
+
+            }
+
+        } else {
+            console.log('ola4')
+            localStorage.setItem('latitude', dadosmapa.latitude)
+            localStorage.setItem('longitude', dadosmapa.longitude)
+            setPositionAlojamento({ lat: dadosmapa.latitude, lng: dadosmapa.longitude })
+        }
     }, [])
 
     return (
@@ -28,15 +44,24 @@ export const Mapa = ({ dados }) => {
             zoom={5}
 
         >
-            <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[-12.5875503, 13.399516499999999]} >
+            <Marker position={
+                [positionAlojamento.lat === undefined
+                    ? center.lat
+                    : positionAlojamento.lat,
+                positionAlojamento.lng === undefined
+                    ? center.lng
+                    : positionAlojamento.lng
+                ]
+            } >
                 <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
+
+            <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
 
 
         </MapContainer>)
