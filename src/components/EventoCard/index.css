@@ -6,6 +6,7 @@
     margin-top: 10px;
     background-color: #fff;
     padding: 10px 10px;
+    
     box-shadow: 5px 0 3px rgba(0, 0, 0, 0.1),
      0 -3px 5px rgba(0, 0, 0, 0.1),
      0 3px 5px rgba(0, 0, 0, 0.1); 
@@ -39,18 +40,29 @@
     text-transform: uppercase;
 }
 .title-hotel h2{
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
     font-size: 12px;
     margin-right: 10px;
     line-height: 1;
     text-transform: uppercase;
 }
+.title-hotel h2 span{
+    cursor: pointer;
+}
+
 .class-content-event{
     display: flex;
     width: 100%;  
 }
+.class-content-p{
+    display: flex;
+    transition: 0.05;
+    width: 100%;  
+}
 .class-content-event p{
-    max-width: 150ch;
+    max-width: 200ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

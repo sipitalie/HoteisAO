@@ -33,7 +33,6 @@ export default function Account() {
                     </div>
                     */}
                 </div>
-
                 {!!Nome && <div>Nome: {Nome}</div>}
                 <div>email: {email}</div>
                 <ChangePassword />

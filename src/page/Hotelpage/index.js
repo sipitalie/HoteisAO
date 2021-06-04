@@ -92,7 +92,7 @@ export default function HotelPage() {
                         <>
                             <div>EVENTOS</div>
                             {IsAdminHotel(dados.owner) && (<CreateEvent idhotel={id} />)}
-                            <EventosHotel />
+                            <EventosHotel IsAdmin={IsAdminHotel(dados.owner)}/>
                         </>
                     )
                 }} />
@@ -110,7 +110,7 @@ export default function HotelPage() {
                         <>
                             <div>Promoções</div>
                             {IsAdminHotel(dados.owner) && (<CreatePromo idhotel={id} />)}
-                            <PromosHotel />
+                            <PromosHotel IsAdmin={IsAdminHotel(dados.owner)}/>
                         </>
                     )
                 }} />

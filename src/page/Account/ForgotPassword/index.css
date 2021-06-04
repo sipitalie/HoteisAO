@@ -1,20 +1,49 @@
 .forgot-password-container{
-    width: 600px;
-    height: 300px;
-    margin-top:100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 37.5rem;
+    height: 18.75rem;
     background-color:white; 
     border-radius: 8px;
-    padding: 0 24px;             
+    padding: 0 1.5rem;             
 }
 .forgot-password div li ul p{
-    font-size: 10px;
+    font-size: 1rem;
     text-decoration: none;
     list-style: none;
 }
 .class-forgot-email{
-    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+   
 }
-/*
-  border: 1px solid #dcdce6;
+.class-forgot-email input{
+    width: 100%;
+    height: 3rem;
+    margin-top: 0;
 
-*/
+}
+.button-class-forgot button{
+    width: 50%;
+    height: 3rem;
+    background: #521750;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500; 
+    font-size: 1.125rem;
+    transition: filter 0.2s;
+    cursor: pointer;
+}
+.button-class-forgot{
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+   
+}

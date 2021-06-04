@@ -40,13 +40,14 @@ const Routes = () => (
         <Route path='/eventos' component={Eventos} />
         <Route path='/promoções' component={Promoções} />
         <Route path='/hotelpage/:id' component={HotelPage} />
+        <Route path='/ForgotPassword' component={ForgotPassword} />
 
 
         {/*
         
         <Route path='/Dashboard' component={Dashboard}/>
         <Route path='/account' component={Account}/>
-        <Route path='/ForgotPassword' component={ForgotPassword}/> 
+         
         <Route path='/sendfeedback' component={Feedback}/>
         <Route path='/register_alojamento' component={RegisterAlojamento}/>
         <Route path='/ajuda' component={Ajuda}/>
@@ -54,7 +55,6 @@ const Routes = () => (
         */}
         <PrivateRoute path='/Dashboard' component={Dashboard} />
         <PrivateRoute path='/account' component={Account} />
-        <PrivateRoute path='/ForgotPassword' component={ForgotPassword} />
         <PrivateRoute path='/sendfeedback' component={Feedback} />
         <PrivateRoute path='/register_alojamento' component={RegisterAlojamento} />
         <PrivateRoute path='/ajuda' component={Ajuda} />

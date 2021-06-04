@@ -1,15 +1,14 @@
 .class-PerfilUser{
     display: flex;
-    /*width: 400px;*/
-    /*margin-top:10px;*/
-    height: 400px;
+    width: 28.125rem;
+    height: 25rem;
     background-color:white;     
     border-radius: 8px;
     flex-direction: column; 
     padding: 10px 10px;
-    box-shadow: 15px 0 20px rgba(0, 0, 0, 0.1),
-     0 -15px 20px rgba(0, 0, 0, 0.1),
-     0 15px 20px rgba(0, 0, 0, 0.1);           
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1),
+     0 -5px 10px rgba(0, 0, 0, 0.1),
+     0 5px 10px rgba(0, 0, 0, 0.1);           
  }
  .Dark-light-and-perfil{
      display: flex;
@@ -62,33 +61,26 @@ input[type="checkbox"]:checked ~ .check::before{
     transform: translateX(30px);
     background: #fff;
 }
+.button-class-ChangePassword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
 
-@media (min-width: 320px){
-    .class-PerfilUse{
-        height: 420px;
-        width: 310px;           
-    }   
-}
-@media (min-width: 360px){
-    .class-PerfilUse{
-        height: 420px;
-        width: 340px;           
-    }   
-}
-@media (min-width: 375px){
-    .class-PerfilUse{
-        height: 420px;
-        width: 365px;           
-    }   
-}
-@media (min-width: 760px){
-    .class-PerfilUse{
-        width: 450px;           
-    }  
-}
-@media (min-width: 1024px){
-    .class-PerfilUse{
-        width: 450px;
-        height: 450px;            
-    }  
-}
+ }
+
+.button-class-ChangePassword button{
+    width: 50%;
+    margin-top:10px;  
+    height: 2.5rem;
+    background: #521750;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0 1.5rem; 
+
+ }
+

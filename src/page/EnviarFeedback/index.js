@@ -1,19 +1,19 @@
-import React, { useState} from 'react';
-import {useDispatch} from 'react-redux'
-import {send_feedback} from '../../store/fetchActions';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { send_feedback } from '../../store/fetchActions';
 //import { Link } from 'react-router-dom';
 //import { Link, useHistory} from 'react-router-dom';
 
 import './index.css';
 
-export default function SendFeedback(){ 
-       
-    const [feedback, setFeedback]= useState('')
+export default function SendFeedback() {
+
+    const [feedback, setFeedback] = useState('')
     const dispatch = useDispatch();
-    function handlefeedback(e){
+    function handlefeedback(e) {
         e.preventDefault();
         const data = {
-            feedback   
+            feedback
         };
         setFeedback('');
         console.log(feedback)
@@ -21,24 +21,24 @@ export default function SendFeedback(){
         //   
     }
 
-   
-    return(
+
+    return (
         <section>
-            <div className="class-Feedback"> 
-                <form className='login-container' onSubmit ={handlefeedback}>
-                <div>Enviar Feedback</div>
-                <div className = 'class-feedback'>              
-                    <textarea
-                        value = {feedback}
-                        required 
-                        onChange ={e => setFeedback(e.target.value)}
-                    />
-                </div>
-                <button type='submit'>Enviar</button>
+            <div className="class-Feedback">
+                <form className='class-Feedback-container' onSubmit={handlefeedback}>
+                    <div>Enviar Feedback</div>
+                    <div className='class-feedback'>
+                        <textarea
+                            value={feedback}
+                            required
+                            onChange={e => setFeedback(e.target.value)}
+                        />
+                    </div>
+                    <button type='submit'>Enviar</button>
                 </form>
-                
-            </div>           
-        </section>  
+
+            </div>
+        </section>
     );
 }
 

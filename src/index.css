@@ -14,7 +14,7 @@ body{
     /*background:white;*/
     font-family: Roboto, sans-serif;
 }
-button{ 
+button { 
     cursor: pointer;
 }
 @media(max-width:1080px){
@@ -60,38 +60,6 @@ button{
     }
 }
 
-/*
-
-.background{
-    background: #c9c9c9;
-    height: 100vh;
-    width: 150%;
-    position: absolute;
-    bottom: 0;
-    z-index: -11;
-    background: linear-gradient(to bottom, #875caa, #ff1605,#FF0095);
-    clip-path: circle(60% at 70% at 80%);
-
-}
-
-
-
-input, button, textarea{
-    font: 400 18px Roboto, sans-serif;
-
-}
-
-form textarea{
-    width: 100%;
-    min-height: 140px;
-    resize: vertical;
-    color:#333;
-    border: 1px solid #dcdce6;
-    border-radius: 8px;
-    padding: 16px 24px;
-    line-height: 24px;  
-}
-*/
 textarea{
     font: 400 14px Roboto, sans-serif;
 
