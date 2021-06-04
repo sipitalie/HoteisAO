@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "filesize": "^6.1.0",
     "google-map-react": "^2.1.9",
+    "leaflet": "^1.7.1",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "react": "^16.13.0",
@@ -17,6 +18,7 @@
     "react-dom": "^16.13.0",
     "react-dropzone": "^11.2.4",
     "react-icons": "^3.10.0",
+    "react-leaflet": "^3.2.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
@@ -32,16 +34,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

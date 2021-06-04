@@ -1,7 +1,7 @@
 import { useParams, Link, Route, useRouteMatch } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaPencilAlt} from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
 
 import { alojamentos_details } from '../../store/fetchActions';
 
@@ -10,6 +10,7 @@ import EventosHotel from './EventosHotelPage';
 import PromosHotel from './PromoçõesHotelPage';
 import AvaliacoesHotel from './AvaliaçõesHotelPage';
 import QuartosHotel from './QuartosHotelPage'
+import { Mapa } from './Mapa/Mapa';
 
 import ButtonUploadImg from '../../components/Upload/Profile_Picture/buttonclikupload';
 import UploadImg from '../../components/Upload/Profile_Picture/Upload';
@@ -29,9 +30,8 @@ export default function HotelPage() {
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    //const {isAuthenticated}= useSelector(state => state.auth); 
 
-    var dados = []
+    const [dados, setDados] = useState([]);
 
     useEffect(() => {
         dispatch(alojamentos_details(id));
@@ -50,12 +50,12 @@ export default function HotelPage() {
     };
     window.addEventListener('scroll', onScroll);
     //window.removeEventListener('scroll', onScroll);
-
-
-
     const alojamentodetail = useSelector((state) => (state.Alojamento));
-    alojamentodetail.map((alojamento, index) => { return dados = alojamento })
-    
+
+
+    useEffect(() => {
+        alojamentodetail.map((alojamento, index) => { return setDados(alojamento) })
+    })
     return (
         <div className="class-PageHotel">
             <header className="header-perfil">
@@ -66,7 +66,7 @@ export default function HotelPage() {
                 <div className="class-content">
                     <div className="class-content-name">
                         <h1>{dados.nome}</h1>
-                        <span>{IsAdminHotel(dados.owner) && <Link to={`/change${match.url}`}><FaPencilAlt color="#521751" size='1.5rem'/></Link>}</span>
+                        <span>{IsAdminHotel(dados.owner) && <Link to={`/change${match.url}`}><FaPencilAlt color="#521751" size='1.5rem' /></Link>}</span>
                     </div>
                     <STAR star={dados.Estrela} />
                     <div>Tipo: {dados.Type_Alojamento}</div>
@@ -81,7 +81,7 @@ export default function HotelPage() {
                     <li><Link to={`${match.url}/promoções`}>Promoções</Link></li>
                     {/*<li><Link to={`${match.url}/avaliacoes`}  >Avaliações</Link></li>*/}
                     <li><Link to={`${match.url}/quartos`} >Quartos</Link></li>
-                    <li><Link to={`${match.url}/mapa`}  >Mapa</Link></li>
+                    <li><Link to={`${match.url}/mapa`}>Mapa</Link></li>
                 </ul>
             </div>
 
@@ -92,7 +92,7 @@ export default function HotelPage() {
                         <>
                             <div>EVENTOS</div>
                             {IsAdminHotel(dados.owner) && (<CreateEvent idhotel={id} />)}
-                            <EventosHotel IsAdmin={IsAdminHotel(dados.owner)}/>
+                            <EventosHotel IsAdmin={IsAdminHotel(dados.owner)} />
                         </>
                     )
                 }} />
@@ -110,7 +110,7 @@ export default function HotelPage() {
                         <>
                             <div>Promoções</div>
                             {IsAdminHotel(dados.owner) && (<CreatePromo idhotel={id} />)}
-                            <PromosHotel IsAdmin={IsAdminHotel(dados.owner)}/>
+                            <PromosHotel IsAdmin={IsAdminHotel(dados.owner)} />
                         </>
                     )
                 }} />
@@ -135,15 +135,9 @@ export default function HotelPage() {
                 <Route path={`${match.path}/mapa`} render={() => {
                     return (
                         <>
-                            <div>Mapa
-                            
-                            
-                            
-                            <img src={`http://maps.googleapis.com/maps/api/staticmap?center=${dados.latitude},${dados.longitude}&zoom=15&markers=color:red|${dados.latitude},${dados.longitude}&size=250x250`}></img>
+                            <div>Mapa</div>
 
-                            </div>
-                            
-
+                            <Mapa dados={dados} />
                         </>
                     )
                 }} />

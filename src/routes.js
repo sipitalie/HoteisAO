@@ -17,6 +17,7 @@ import Dashboard from './page/Dashboard'
 import RegisterAlojamento from './page/RegisterAlojamento'
 import SendPhotosToTheBedroomGallery from './components/Upload/Bedroom_Photo_Gallery/';
 import ChangeAlojamento from './page/Hotelpage/ChangeAloamento'
+import { Mapa } from './page/Hotelpage/Mapa/Mapa';
 
 
 
@@ -41,18 +42,7 @@ const Routes = () => (
         <Route path='/promoções' component={Promoções} />
         <Route path='/hotelpage/:id' component={HotelPage} />
         <Route path='/ForgotPassword' component={ForgotPassword} />
-
-
-        {/*
-        
-        <Route path='/Dashboard' component={Dashboard}/>
-        <Route path='/account' component={Account}/>
-         
-        <Route path='/sendfeedback' component={Feedback}/>
-        <Route path='/register_alojamento' component={RegisterAlojamento}/>
-        <Route path='/ajuda' component={Ajuda}/>
-        <Route path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery}/> 
-        */}
+        <Route path='/mapa/hotelpage/:id/' component={Mapa} />
         <PrivateRoute path='/Dashboard' component={Dashboard} />
         <PrivateRoute path='/account' component={Account} />
         <PrivateRoute path='/sendfeedback' component={Feedback} />
