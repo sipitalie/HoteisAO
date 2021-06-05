@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
-import { Container, Content } from './styles';
+import React, { useState, useEffect } from 'react';
+import { Container, Content, ButtomDiv } from './styles';
 import api from '../../../service/api';
-//import {Link, useHistory } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
-export default function CreateEvent(props) {
-    // const history = useHistory();
+export default function ChangeEvent() {
+    const history = useHistory();
+
+    const { idhotel, id } = useParams();
     const [title, setTitle] = useState('');
     const [content, setcontent] = useState('');
     const [data_do_evento, setData] = useState('');
     const token = localStorage.getItem('token');
     const owner = localStorage.getItem('id');
-    const hotel_owner = props.idhotel
+    const hotel_owner = idhotel
+    console.log(idhotel, id)
 
-    //função para criar un novo Evento
-    async function handleNewEvent(e) {
+    useEffect(() => {
+        api.get(`api.v1/evento/${id}`).then(res => {
+            setTitle(res.data.title);
+            setcontent(res.data.content);
+            setData(res.data.data_do_evento);
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+    //função para  actualizar um  Evento
+    async function handleChangeEvent(e) {
         e.preventDefault();
         const data = {
             title,
@@ -22,29 +36,36 @@ export default function CreateEvent(props) {
             hotel_owner,
             owner,
         };
-        console.log(data);
         try {
-            const resp = await api.post('api.v1/evento/', data, /*{
+            await api.put(`api.v1/evento/${id}/`, data, {
                 headers: {
-                    Authorization: token,
+                    Authorization: `Token ${token}`,
                 }
-            }*/)
+            })
             //history.push('/eventos');
-            console.log(resp.data)
-            setTitle('')
-            setcontent('')
-            setData('')
-            window.location.reload();
+            history.push(`/hotelpage/${idhotel}`);
 
         } catch (err) {
             console.log('Erro, tente novamente', err)
 
+
         }
     }
+    function HandleDeleteEvent() {
+        console.log('ola')
+        api.delete(`api.v1/evento/${id}/`).then(res => {
+            history.push(`/hotelpage/${idhotel}`);
+
+        }).catch(err => {
+            console.log('Erro, tente novamente', err)
+
+        })
+    }
+
     return (
         <Container>
             <Content>
-                <form onSubmit={handleNewEvent}>
+                <form onSubmit={handleChangeEvent}>
                     <div>
                         <input
                             placeholder="Titulo do Evento"
@@ -64,8 +85,13 @@ export default function CreateEvent(props) {
                         value={content}
                         onChange={e => setcontent(e.target.value)}
                     />
+                    <ButtomDiv>
+                        <button id="button-delete" onClick={HandleDeleteEvent}>Apagar</button>
+                        <button className="button" type="submit">Atualizar</button>
 
-                    <button className="button" type="submit">Publicar</button>
+
+                    </ButtomDiv>
+
                 </form>
             </Content>
         </Container>
@@ -73,13 +99,3 @@ export default function CreateEvent(props) {
     )
 
 };
-/*{
-
-    "title": "NOite123",
-    "content": "ajrffbn \r\nfweuhfhihbv",
-    "data_do_evento": "2020-06-20",
-      "hotel_owner": 21
-
-
-
-}*/

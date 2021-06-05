@@ -27,6 +27,7 @@ import './index.css';
 export default function HotelPage() {
     let match = useRouteMatch();
     const [navMenu, SetnavMenu] = useState(false);
+
     const { id } = useParams();
     const dispatch = useDispatch();
 

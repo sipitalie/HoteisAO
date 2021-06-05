@@ -17,6 +17,7 @@ import Dashboard from './page/Dashboard'
 import RegisterAlojamento from './page/RegisterAlojamento'
 import SendPhotosToTheBedroomGallery from './components/Upload/Bedroom_Photo_Gallery/';
 import ChangeAlojamento from './page/Hotelpage/ChangeAloamento'
+import ChangeEvent from './page/Hotelpage/changeEventos/';
 import { Mapa } from './page/Hotelpage/Mapa/Mapa';
 
 
@@ -49,9 +50,11 @@ const Routes = () => (
         <PrivateRoute path='/register_alojamento' component={RegisterAlojamento} />
         <PrivateRoute path='/ajuda' component={Ajuda} />
         <PrivateRoute path='/change/hotelpage/:id/' component={ChangeAlojamento} />
+        <PrivateRoute path='/evento/:idhotel/:id/' component={ChangeEvent} />
         <PrivateRoute path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery} />
 
 
     </Switch>
 );
 export default Routes;
+

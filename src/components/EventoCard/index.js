@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 //import {FiMapPin, FiWifi,} from 'react-icons/fi';
 
 import { FaPencilAlt } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { useParams, Link, Route, useRouteMatch } from 'react-router-dom';
 import './index.css';
 
 
-export default function EventCard({ evento, IsAdmin }) {
+export default function EventCard({ evento, IsAdmin, hotel_owner_id }) {
     const [lembrete, Setlembret] = useState(false)
     const [vermais, SetVermais] = useState(false)
     const [texVerMaisOumenos, setTexVerMaisOumenos] = useState('ver mais')
     const [classname, setclassName] = useState("class-content-event")
     const Df_rv_lembret = () => Setlembret(!lembrete);
+    let match = useRouteMatch();
     //console.log(lembrete)
     let definir_or_remover_lembrte = 'Remover lembrete'
     if (lembrete === false) {
@@ -39,7 +40,7 @@ export default function EventCard({ evento, IsAdmin }) {
                 <h2>
                     {evento.title}
                     {IsAdmin && !evento.Nomehotel && <span>
-                        <Link><FaPencilAlt /></Link>
+                        <Link to={`/evento/${hotel_owner_id}/${evento.id}/`}><FaPencilAlt /></Link>
                     </span>}
                 </h2>
             </div>

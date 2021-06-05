@@ -8,6 +8,7 @@ import './index.css';
 
 export default function EventosHotel({ IsAdmin }) {
     const Evento = useSelector((state) => (state.Eventos));
+
     const dispatch = useDispatch();
     const { id } = useParams();
     const hotel_owner_id = id
@@ -19,7 +20,12 @@ export default function EventosHotel({ IsAdmin }) {
     return (
         <>
             {lengthEvents > 0 ? <div className="EventosHotelPage">
-                {Evento.map((eventos, index) => <EventCard key={index} evento={eventos} IsAdmin={IsAdmin} />)}
+                {Evento.map((eventos, index) => <EventCard
+                    key={index}
+                    evento={eventos}
+                    IsAdmin={IsAdmin}
+                    hotel_owner_id={hotel_owner_id}
+                />)}
             </div> : <InfoCard info='Sem eventos publicados' />}
         </>
     );

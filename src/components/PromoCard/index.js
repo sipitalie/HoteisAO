@@ -7,8 +7,6 @@ import { PromInfo, Container } from './styles';
 
 export default function PromCard({ promo }) {
 
-    console.log(promo)
-
     return (
         <Container>
             <PromInfo>

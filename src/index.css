@@ -74,5 +74,8 @@ form textarea{
     padding: 16px 24px;
     line-height: 24px; 
  }
-
+a{
+    text-decoration: none;
+    color: #521751;
+}
 
