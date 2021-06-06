@@ -107,7 +107,7 @@
 }
 .dercricãoHotel{
    display: flex;
-   justify-content: center; 
+   justify-content: start; 
 }
 .navMenu ul li{
    margin-left: 10px;

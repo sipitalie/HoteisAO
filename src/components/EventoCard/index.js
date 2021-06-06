@@ -47,7 +47,7 @@ export default function EventCard({ evento, IsAdmin, hotel_owner_id }) {
             <div className={classname}>
                 <p>{evento.content}</p>
             </div>
-            <div className="Evento-card-P" onClick={alterStailincss}><p>{texVerMaisOumenos}</p></div>
+            {evento.content.length > 100 && <div className="Evento-card-P" onClick={alterStailincss}><p>{texVerMaisOumenos}</p></div>}
 
             <div className="event-data-detalhes">
                 <p>dia: {evento.data_do_evento}</p>

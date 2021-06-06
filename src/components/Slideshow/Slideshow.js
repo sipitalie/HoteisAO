@@ -19,7 +19,7 @@ export default function Slider(props) {
             console.log(response.data)
             const urls = response.data.map((imgfile) => {
 
-                return <ImgComp src={`http://127.0.0.1:8000${imgfile.file}`} Id={imgfile.id} deleteg={deleteg} deleteimg={deleteimg} />
+                return <ImgComp src={`http://127.0.0.1:8000${imgfile.file}`} />
             });
             Setlisturls(urls);
         }).catch((err) => {

@@ -5,6 +5,7 @@
     align-items: center;
     background-color: transparent;
     width: 41.6rem;
+    margin-bottom: 1rem;
 }
 .Class_column_Quarto_left_img{
     display: flex;
@@ -144,4 +145,7 @@
     box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1),
      0 -1px 3px rgba(0, 0, 0, 0.1),
      0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.Class_column_Quarto_right_info p{
+    font-size: 1rem;
 }

@@ -2,9 +2,20 @@
     display:  grid;
     min-height: auto;
     flex-direction: column;  
+    grid-template-columns: repeat(2, 1fr);
     margin-bottom: 1.25rem;      
 }
-
+ /*
+.containerSearch{
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-left: 28%;
+   margin-left: 15.625rem; 
+   
+    transform: translateX(-24%);   
+}
+*/
 
 
 @media (min-width: 1024px){
@@ -18,10 +29,20 @@
         justify-content: center;
         align-self: center;
         margin-left: 28%;
+        /*margin-left: 15.625rem;*/ 
         transform: translateX(-24%);    
     }
 }
+.Search2IconLabel{
+    position: absolute;
+    right: 1px;
+    width: 2rem;
+    top: 16px;
+    bottom: 1.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
 
+}
 /*
 .Slider{
     width: 100%;
