@@ -4,6 +4,7 @@ import { FaSearch } from 'react-icons/fa'
 import { get_all_alojamentos, a_Seguirhotel } from '../../store/fetchActions';
 import './Home.css';
 import Card from "../../components/Card/Card";
+import api from '../../service/api';
 //import { useParams, Link, Route, useRouteMatch } from 'react-router-dom';
 
 
@@ -32,7 +33,14 @@ export default function Home() {
         if (x === 13) {
             const search = e.target.value
             if (search.length > 0) {
-                console.log('Search press enter', x, search)
+                console.log(search)
+                api.get(`api.v1/filter?search=${search}`).then(res => {
+                    console.log('Search press enter result=>', res.data)
+
+                }).catch(err => {
+                    console.log(err)
+                })
+
             }
         }
 
