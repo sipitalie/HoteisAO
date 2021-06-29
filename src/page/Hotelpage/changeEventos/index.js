@@ -12,8 +12,9 @@ export default function ChangeEvent() {
     const [data_do_evento, setData] = useState('');
     const token = localStorage.getItem('token');
     const owner = localStorage.getItem('id');
+
     const hotel_owner = idhotel
-    console.log(idhotel, id)
+    const [Mensagem, setMensagem] = useState(null)
 
     useEffect(() => {
         api.get(`api.v1/evento/${id}`).then(res => {
@@ -37,22 +38,34 @@ export default function ChangeEvent() {
             owner,
         };
         try {
-            await api.put(`api.v1/evento/${id}/`, data, {
+            const resp = await api.put(`api.v1/evento/${id}/`, data, {
                 headers: {
                     Authorization: `Token ${token}`,
                 }
             })
-            //history.push('/eventos');
-            history.push(`/hotelpage/${idhotel}`);
+            setMensagem(resp.status)
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
+            //history.push(`/hotelpage/${idhotel}`);
 
         } catch (err) {
-            console.log('Erro, tente novamente', err)
+            setMensagem('Erro, tente novamente')
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
 
 
         }
     }
     function HandleDeleteEvent() {
-        console.log('ola')
+
         api.delete(`api.v1/evento/${id}/`).then(res => {
             history.push(`/hotelpage/${idhotel}`);
 
@@ -66,6 +79,18 @@ export default function ChangeEvent() {
         <Container>
             <Content>
                 <form onSubmit={handleChangeEvent}>
+                    {Mensagem === 200 && <div id='sucess' style={{
+                        width: "100%",
+                        display: 'flex'
+                    }}><p>Sucesso!</p></div>}
+                    {Mensagem === 'Erro, tente novamente' && <div id='fail'
+                        style={{
+                            width: "100%",
+                            display: 'flex',
+                            marginTop: '0.2rem',
+                            justifyContent: 'center',
+                            color: 'white'
+                        }}><p>{Mensagem}</p></div>}
                     <div>
                         <input
                             placeholder="Titulo do Evento"
@@ -86,10 +111,37 @@ export default function ChangeEvent() {
                         onChange={e => setcontent(e.target.value)}
                     />
                     <ButtomDiv>
-                        <button id="button-delete" onClick={HandleDeleteEvent}>Apagar</button>
-                        <button className="button" type="submit">Atualizar</button>
-
-
+                        <button
+                            style={
+                                {
+                                    width: '40%',
+                                    height: '40px',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    marginTop: '10px',
+                                    color: 'white',
+                                    backgroundColor: 'red',
+                                    transition: '0.6s',
+                                }
+                            }
+                            id="button"
+                            type='button'
+                            onClick={HandleDeleteEvent}
+                        >Apagar</button>
+                        <button
+                            style={
+                                {
+                                    width: '40%',
+                                    height: '40px',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    marginTop: '10px',
+                                    color: 'white',
+                                    backgroundColor: '#521751',
+                                    transition: '0.6s',
+                                }
+                            }
+                            id="button" type="submit">Atualizar</button>
                     </ButtomDiv>
 
                 </form>

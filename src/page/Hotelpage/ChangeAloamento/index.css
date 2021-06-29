@@ -17,12 +17,20 @@
 }
 .class-icon-change{
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
     justify-items: center; 
    
    
 }
+#sucess{
+    background-color: rgb(196, 221, 196);
+}
+#fail{
+    background-color: rgb(209, 68, 68);
+}
+
 .class-icon-change h1{
     text-decoration: none;
     align-content: center;
@@ -73,16 +81,16 @@
     width: 45%;
     margin-top: 10px;
 }
-.button-class {
+.button-class-change {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     
 
 }
 
-.button-class button{
-    width: 50%;
+.button-class-change button{
+    width: 40%;
     height: 40px;
     background: #521750;
     border: 0;
@@ -127,6 +135,11 @@
     border-radius: 8px;
     padding: 0 10px;
 }
+#delete{
+    
+    background:red;
+    
+}
 input{
     width: 100%;
     height: 40px;
@@ -146,6 +159,6 @@ select{
     padding: 0 10px;
 }
 
-.button-class button:hover{
+.button-class-change button:hover{
     filter: brightness(80%);
 }

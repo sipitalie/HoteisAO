@@ -16,35 +16,38 @@ export default function RegisterAlojamento() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [errorGeolocation, setGeolocation] = useState(null)
+    const [imgFile, SetimagFile] = useState();
+
     const owner = localStorage.getItem('id');
 
     const dispatch = useDispatch();
 
     function handlerRegisterAlojamento(e) {
         e.preventDefault();
-        const data = {
-            nome,
-            Type_Alojamento,
-            Estrela,
-            pais,
-            Provincia,
-            cidade,
-            linha,
-            latitude,
-            longitude,
-            owner
-        };
-        setNome('');
+
+        const data = new FormData();
+
+        data.append('foto', imgFile)
+        data.append('nome', nome)
+        data.append('Type_Alojamento', Type_Alojamento)
+        data.append('Estrela', Estrela)
+        data.append('pais', pais)
+        data.append('Provincia', Provincia)
+        data.append('cidade', cidade)
+        data.append('linha', linha)
+        data.append('latitude', latitude)
+        data.append('longitude', longitude)
+        data.append('owner', owner)
+        dispatch(alojamento_register(data));
+        /*setNome('');
         setType('');
         setEstrela('');
         setPais('');
         setProvincia('');
         setLinha('');
+        setCidade('');
         setLatitude('');
-        setLongitude('');
-
-        dispatch(alojamento_register(data));
-
+        setLongitude('');*/
     }
     var options = {
         enableHighAccuracy: true,
@@ -90,8 +93,10 @@ export default function RegisterAlojamento() {
                         <select id='selectclasstipo' value={Type_Alojamento} onChange={e => setType(e.target.value)}>
                             <option value={'Hotel'}>Hotel</option>
                             <option value={'Apart-hotel'}>Apart-hotel</option>
-                            <option value={'Residencial/Pensão'}>Residencial/Pensão</option>
-                            <option value={'Resort/Lodge'}>Resort/Lodge</option>
+                            <option value={'Residencial'}>Residencial</option>
+                            <option value={'Pensão'}>Pensão</option>
+                            <option value={'Resort'}>Resort</option>
+                            <option value={'Lodge'}>Lodge</option>
                             <option value={'Outros'}>Outros</option>
                         </select>
                         <select value={Estrela} onChange={e => setEstrela(e.target.value)}>
@@ -135,24 +140,37 @@ export default function RegisterAlojamento() {
                         <input
                             placeholder="Longitude"
                             value={longitude}
+                            required
                             onChange={e => setLongitude(e.target.value)}
                         />
+
                     </div>
 
                     <div className='class-checkbox'>
                         <p>pegar cordenadas atuais</p>
-                        <button id="checkboxTrue" onClick={getLocation}>Get</button>
+                        <button id="checkboxTrue" type="button" onClick={getLocation}>Get</button>
 
                     </div>
                     <div className='class-endereço'>
-                        <input
+                        <textarea
                             placeholder="Descrição"
                             value={linha}
                             required
                             type="text"
+                            maxLength={150}
                             onChange={e => setLinha(e.target.value)}
                         />
                     </div>
+                    <div>
+                        <input
+                            placeholder="Foto"
+                            type="file"
+                            id='addfotobotton'
+                            required
+                            onChange={e => SetimagFile(e.target.files[0])}
+                        />
+                    </div>
+
 
                     <div className='button-class'>
                         <button type="submit"> Cadastrar </button>

@@ -1,16 +1,20 @@
 .class-register-alojamento{
     display: flex;
-    margin-top:1.9rem;
+    width: 28rem;  
     flex-direction: column;
     justify-content: center;
     background-color:white; 
     border-radius: 0.5rem;
-    padding: 0 1.5rem;              
+    padding: 0 1.5rem;   
+    margin-top:3.75rem;           
 }
 .class-icon-register {
     display: flex;
-    justify-content: center;
-    justify-items: center;   
+    justify-content: center; 
+    text-decoration: none;
+    align-content: center;
+    text-align: center;
+    font-size: 1.5rem;
 }
 .class-register-alojamento div.class-icon-register h1{
     text-decoration: none;
@@ -113,6 +117,10 @@ input{
     border-radius: 8px;
     padding: 0 10px;
 }
+#addfotobotton{
+    border: 0
+
+}
 select{
     width: 100%;
     height: 40px;
@@ -127,7 +135,7 @@ select{
     filter: brightness(80%);
 }
 
-
+/*
 @media (min-width: 320px){
     .class-register-alojamento{
         height: 500px;
@@ -165,7 +173,7 @@ select{
     }  
 }
 
-/*
+
 Register-container
 border: 1px solid #dcdce6;
 */

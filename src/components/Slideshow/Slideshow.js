@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTrashAlt } from "react-icons/fa";
 import api from '../../service/api';
 import ImgComp from './ImgComp';
-import h1 from '../../assets/h1.jpg';
-
+import defaultImg from '../../assets/DefaultImg.png';
 
 
 export default function Slider(props) {
@@ -51,7 +50,7 @@ export default function Slider(props) {
                         </div>
                     )
                 })
-                ) : (<ImgComp src={h1} Id={null} />)}
+                ) : (<ImgComp src={defaultImg} Id={null} />)}
             <span className="span-goLeft" >
                 <button id="goLeft" onClick={goLeft}>
                     <div ><FaChevronLeft /></div>

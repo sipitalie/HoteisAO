@@ -17,13 +17,16 @@ export default function ChangeAlojamento() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [errorGeolocation, setGeolocation] = useState(null)
+
     const owner = localStorage.getItem('id');
+
+    const [Mensagem, setMensagem] = useState(null)
 
     const { id } = useParams();
 
     useEffect(() => {
         api.get(`api.v1/alojamentos/${id}`).then(res => {
-            console.log(res.data)
+
             setNome(res.data.nome);
             setType(res.data.Type_Alojamento);
             setEstrela(res.data.Estrela);
@@ -33,6 +36,7 @@ export default function ChangeAlojamento() {
             setCidade(res.data.cidade);
             setLatitude(res.data.latitude);
             setLongitude(res.data.longitude);
+
         }).catch(err => {
             console.log(err)
 
@@ -55,9 +59,23 @@ export default function ChangeAlojamento() {
             owner
         };
         api.put(`api.v1/alojamentos/${id}/`, data).then(res => {
-            console.log(res.status)
+            //console.log(res.status)
+            setMensagem(res.status)
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
         }).catch(err => {
-            console.log(err)
+
+            setMensagem('error')
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
 
         })
     }
@@ -84,11 +102,18 @@ export default function ChangeAlojamento() {
             setGeolocation("Geolocation is not supported by this browser.")
         }
     }
+    function DeleteAlojamento() {
+        alert('delete')
+
+
+    }
     return (
         <div className='class-change'>
             <form onSubmit={handlerChangeAlojamento}>
                 <div className='class-change-alojamento'>
                     <div className='class-icon-change'>
+                        {Mensagem === 200 && <div id='sucess'><p>Sucesso!</p></div>}
+                        {Mensagem === 'error' && <div id='fail'><p>fail</p></div>}
                         <h1>Alterar dados do alojamento</h1>
                     </div>
                     <div className='class-name-register'>
@@ -104,8 +129,10 @@ export default function ChangeAlojamento() {
                         <select id='selectclasstipo' value={Type_Alojamento} onChange={e => setType(e.target.value)}>
                             <option value={'Hotel'}>Hotel</option>
                             <option value={'Apart-hotel'}>Apart-hotel</option>
-                            <option value={'Residencial/Pensão'}>Residencial/Pensão</option>
-                            <option value={'Resort/Lodge'}>Resort/Lodge</option>
+                            <option value={'Residencial'}>Residencial</option>
+                            <option value={'Pensão'}>Pensão</option>
+                            <option value={'Lodge'}>Lodge</option>
+                            <option value={'Resort'}>Resort</option>
                             <option value={'Outros'}>Outros</option>
                         </select>
                         <select value={Estrela} onChange={e => setEstrela(e.target.value)}>
@@ -155,7 +182,7 @@ export default function ChangeAlojamento() {
 
                     <div className='class-checkbox'>
                         <p>pegar cordenadas atuais</p>
-                        <button id="checkboxTrue" onClick={getLocation}>Get</button>
+                        <button id="checkboxTrue" type='button' onClick={getLocation}>Get</button>
 
                     </div>
                     <div className='class-endereço-Descrição'>
@@ -171,8 +198,10 @@ export default function ChangeAlojamento() {
                         />
                     </div>
 
-                    <div className='button-class'>
+
+                    <div className='button-class-change'>
                         <button type="submit">Alterar</button>
+                        <button type='button' id='delete' onClick={DeleteAlojamento}>Apagar</button>
                     </div>
                 </div>
             </form>

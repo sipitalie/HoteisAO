@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { quartos_hotel } from '../../../store/fetchActions';
 
 import { Conteainer, Content } from './styles';
 import api from '../../../service/api';
@@ -6,10 +9,14 @@ import api from '../../../service/api';
 export default function CreateBadroon(props) {
     const [Caract_bedroom, setCaract_bedroom] = useState(null);
     const [type_bedroom, settype_bedroom] = useState(null);
+    const [Mensagem, setMensagem] = useState(null)
     const [preco, setpreco] = useState('');
     const [Numero_do_quarto, setNumero_do_quarto] = useState('');
     const token = localStorage.getItem('token');
     const hotel_owner = props.idhotel
+
+    const dispatch = useDispatch();
+    const { id } = useParams();
     async function handleNewBadroom(e) {
         e.preventDefault();
         const data = {
@@ -19,18 +26,31 @@ export default function CreateBadroon(props) {
             hotel_owner: Number(hotel_owner),
             Numero_do_quarto,
         };
-        console.log(data, props)
+
         try {
-            const response = await api.post('api.v1/quarto/register', data, {
+            const res = await api.post('api.v1/quarto/register', data, {
                 headers: {
                     Authorization: `Token ${token}`,
                 }
             })
-            console.log(response.data);
+            setMensagem(res.status)
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
+            dispatch(quartos_hotel(id));
 
 
         } catch (err) {
-            console.log('Erro, tente novamente', err)
+            setMensagem('Erro, tente novamente')
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
         }
     }
     //Numero_do_quarto=models.IntegerField()
@@ -40,6 +60,18 @@ export default function CreateBadroon(props) {
             <Content>
                 <form onSubmit={handleNewBadroom}>
                     <div>
+                        {Mensagem === 201 && <div id='sucess' style={{
+                            width: "100%",
+                            display: 'flex'
+                        }}><p>Sucesso!</p></div>}
+                        {Mensagem === 'Erro, tente novamente' && <div id='fail'
+                            style={{
+                                width: "100%",
+                                display: 'flex',
+                                marginTop: '0.2rem',
+                                justifyContent: 'center',
+                                color: 'white'
+                            }}><p>{Mensagem}</p></div>}
                         <select value={Caract_bedroom} onChange={e => setCaract_bedroom(e.target.value)}>
                             <option value='' >Categoria do quarto</option>
                             <option value={'Standard'}>Standard</option>

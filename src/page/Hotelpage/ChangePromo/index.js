@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { quartos_hotel, promo_hotel } from '../../../store/fetchActions';
 
-import { Conteainer, Content } from './styles';
+import { Conteainer, Content, ButtomDiv } from './styles';
 import api from '../../../service/api';
 
-export default function CreatePromo(props) {
+export default function ChangePromo(props) {
+    const history = useHistory();
+
     const [Percentagem, SetPercentagem] = useState();
     const [DataDeValidade, SetDataDeValidade] = useState();
     const [DataInit, SetDataInit] = useState();
@@ -16,40 +18,49 @@ export default function CreatePromo(props) {
     const hotel_owner = props.idhotel
     const Quartos = useSelector((state) => (state.Quartos));
     const dispatch = useDispatch();
-    const { id } = useParams();
-    const hotel_owner_id = id
+    const { id, idhotel } = useParams();
+    const hotel_owner_id = idhotel
     useEffect(() => {
         dispatch(quartos_hotel(hotel_owner_id));
+
+        api.get(`api.v1/promoçao/${id}`).then(res => {
+
+            SetTypeCategoryQuarto(res.data.tipo_quarto + ',' + res.data.Caract)
+            SetPercentagem(res.data.percentagem)
+            SetDataInit(res.data.init_data)
+            SetDataDeValidade(res.data.valid_data)
+
+        }).catch(err => {
+            console.log(err)
+        })
     }, [dispatch, hotel_owner_id]);
 
 
     const lengthquarto = Quartos.length;
 
-    async function handleNewPromo(e) {
+    async function handleChangePromo(e) {
         e.preventDefault();
         const type_and_Category = type_and_Category_Quarto.split(',')
         const data = {
             percentagem: Percentagem,
             valid_data: DataDeValidade,
             init_data: DataInit,
-            hotel: hotel_owner,
+            hotel: hotel_owner_id,
             tipo_quarto: type_and_Category[0],
             Caract: type_and_Category[1],
         };
 
 
         try {
-            const resp = await api.post('api.v1/promoçao/', data, {
+            console.log(data)
+            const resp = await api.put(`api.v1/promoçao/${id}/`, data, {
                 headers: {
                     Authorization: `Token ${localStorage.getItem('token')}`,
                 }
             })
             setMensagem(resp.status)
-            SetPercentagem('');
-            SetDataDeValidade('')
-            SetDataInit('');
-            SetTypeCategoryQuarto('');
             dispatch(promo_hotel(hotel_owner_id));
+
 
             setTimeout(
                 function () {
@@ -68,12 +79,21 @@ export default function CreatePromo(props) {
             )
         }
     }
+    function HandleDeletePromo() {
+        api.delete(`api.v1/promoçao/${id}/`).then(res => {
+            history.push(`/hotelpage/${idhotel}`);
+
+        }).catch(err => {
+            console.log('Erro, tente novamente', err)
+
+        })
+    }
     return (
         <Conteainer>
             <Content>
-                <form onSubmit={handleNewPromo}>
+                <form onSubmit={handleChangePromo}>
                     <div>
-                        {Mensagem === 201 && <div id='sucess' style={{
+                        {Mensagem === 200 && <div id='sucess' style={{
                             width: "100%",
                             display: 'flex'
                         }}><p>Sucesso!</p></div>}
@@ -109,7 +129,40 @@ export default function CreatePromo(props) {
                             value={Percentagem}
                             onChange={e => SetPercentagem(e.target.value)}
                         />
-                        <button className="button" type="submit">Criar</button>
+                        <ButtomDiv>
+                            <button
+                                style={
+                                    {
+                                        width: '40%',
+                                        height: '40px',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        marginTop: '10px',
+                                        color: 'white',
+                                        backgroundColor: 'red',
+                                        transition: '0.6s',
+                                    }
+                                }
+                                id="button"
+                                type='button'
+                                onClick={HandleDeletePromo}
+                            >Apagar</button>
+                            <button
+                                style={
+                                    {
+                                        width: '40%',
+                                        height: '40px',
+                                        border: 'none',
+                                        borderRadius: '5px',
+                                        marginTop: '10px',
+                                        color: 'white',
+                                        backgroundColor: '#521751',
+                                        transition: '0.6s',
+                                    }
+                                }
+                                id="button" type="submit">Atualizar</button>
+                        </ButtomDiv>
+
                     </div>
 
                 </form>

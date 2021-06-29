@@ -18,7 +18,11 @@ export default function PromosHotel({ IsAdmin }) {
     return (
         <>
             {lengthPomo > 0 ? <div className="PromosHotelPage">
-                {Promo.map((promos, index) => <PromoCard key={index} promo={promos} IsAdmin={IsAdmin} />)}
+                {Promo.map((promos, index) => <PromoCard
+                    key={index}
+                    promo={promos}
+                    IsAdmin={IsAdmin}
+                    hotel_owner_id={hotel_owner_id} />)}
             </div> : <InfoCard info='sem promoções publicadas' />
             }
         </>

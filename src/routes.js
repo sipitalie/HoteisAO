@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
-//import { useSelector } from 'react-redux';
+import api from './service/api'
 
 
 import Login from './page/Account/Login';
 import Register from './page/Account/Register/Register';
 import Home from './page/Home';
+import OwnerHome from '../src/page/Account/OwnerAlojamentos'
 import ForgotPassword from './page/Account/ForgotPassword';
 import Account from './page/Account/Configurações';
 import Eventos from './page/Eventos';
@@ -19,7 +20,8 @@ import SendPhotosToTheBedroomGallery from './components/Upload/Bedroom_Photo_Gal
 import ChangeAlojamento from './page/Hotelpage/ChangeAloamento'
 import ChangeEvent from './page/Hotelpage/changeEventos/';
 import { Mapa } from './page/Hotelpage/Mapa/Mapa';
-
+import ChangePromo from './page/Hotelpage/ChangePromo';
+import ChangeBadroon from './page/Hotelpage/ChangeBadroon';
 
 
 function PrivateRoute({ component: Component, ...rest }) {
@@ -33,10 +35,31 @@ function PrivateRoute({ component: Component, ...rest }) {
     )
 }
 
+function IsOwnerRouter({ component: Component, ...rest }) {
+
+    const [isOwner, seIsOwner] = useState([])
+    const isAutenticated = () => localStorage.getItem('token');
+    useEffect(() => {
+        //if (isAutenticated) {
+        api.get(`api.v1/alojamentosOwner/${localStorage.getItem('id')}/`).then(res => {
+            seIsOwner(res.data.length)
+        }).catch(err => {
+            console.log(err)
+        })
+        //}
+    }, [])
+
+    return (
+        <Route {...rest} render={(props) => (
+            !(isOwner > 0) ? (<Component {...props} />) : (<Redirect to={{ pathname: '/yourlodging', state: { from: props.location } }} />)
+        )} />
+    )
+}
 
 const Routes = () => (
     <Switch>
-        <Route exact path='/' component={Home} />
+        <IsOwnerRouter exact path='/' component={Home} />
+        {/*<Route  path='/' component={Home} />*/}
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/eventos' component={Eventos} />
@@ -51,7 +74,11 @@ const Routes = () => (
         <PrivateRoute path='/ajuda' component={Ajuda} />
         <PrivateRoute path='/change/hotelpage/:id/' component={ChangeAlojamento} />
         <PrivateRoute path='/evento/:idhotel/:id/' component={ChangeEvent} />
+        <PrivateRoute path='/promo/:idhotel/:id/' component={ChangePromo} />
+        <PrivateRoute path='/quarto/:idhotel/:id/' component={ChangeBadroon} />
         <PrivateRoute path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery} />
+        <PrivateRoute path='/yourlodging' component={OwnerHome} />
+
 
 
     </Switch>

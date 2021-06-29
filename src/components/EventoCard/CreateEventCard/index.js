@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Content } from './styles';
+import { useDispatch } from 'react-redux';
+import { eventos_hotel } from '../../../store/fetchActions';
 import api from '../../../service/api';
-//import {Link, useHistory } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function CreateEvent(props) {
     // const history = useHistory();
@@ -11,6 +13,10 @@ export default function CreateEvent(props) {
     const token = localStorage.getItem('token');
     const owner = localStorage.getItem('id');
     const hotel_owner = props.idhotel
+    const [Mensagem, setMensagem] = useState(null)
+
+    const dispatch = useDispatch();
+    const { id } = useParams();
 
     //função para criar un novo Evento
     async function handleNewEvent(e) {
@@ -24,20 +30,35 @@ export default function CreateEvent(props) {
         };
         console.log(data);
         try {
-            const resp = await api.post('api.v1/evento/', data, /*{
+            const resp = await api.post('api.v1/evento/', data, {
                 headers: {
-                    Authorization: token,
+                    Authorization: `Token ${localStorage.getItem('token')}`,
                 }
-            }*/)
-            //history.push('/eventos');
-            console.log(resp.data)
+            })
+
+            setMensagem(resp.status)
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
             setTitle('')
             setcontent('')
             setData('')
-            window.location.reload();
+            dispatch(eventos_hotel(id));
+
+
+
 
         } catch (err) {
-            console.log('Erro, tente novamente', err)
+            setMensagem('Erro, tente novamente')
+            setTimeout(
+                function () {
+                    setMensagem(null)
+                },
+                5000
+            )
 
         }
     }
@@ -45,6 +66,18 @@ export default function CreateEvent(props) {
         <Container>
             <Content>
                 <form onSubmit={handleNewEvent}>
+                    {Mensagem === 201 && <div id='sucess' style={{
+                        width: "100%",
+                        display: 'flex'
+                    }}><p>Sucesso!</p></div>}
+                    {Mensagem === 'Erro, tente novamente' && <div id='fail'
+                        style={{
+                            width: "100%",
+                            display: 'flex',
+                            marginTop: '0.2rem',
+                            justifyContent: 'center',
+                            color: 'white'
+                        }}><p>{Mensagem}</p></div>}
                     <div>
                         <input
                             placeholder="Titulo do Evento"

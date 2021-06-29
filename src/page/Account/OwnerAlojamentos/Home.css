@@ -1,0 +1,19 @@
+.containerOwner{
+    display:  grid;
+    min-height: auto;
+    flex-direction: column;  
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 1.25rem;  
+    
+}
+ 
+
+
+@media (min-width: 1024px){
+    .containerOwner{
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        margin-left: 12.1rem;    
+    } 
+    
+}

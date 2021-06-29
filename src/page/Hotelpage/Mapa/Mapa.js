@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { useParams } from 'react-router-dom';
 import './index.css'
 import "leaflet/dist/leaflet.css";
+import { iconPerson } from './Icon';
+import api from '../../../service/api';
 
 
 //, 
 
 
 export function Mapa({ dadosmapa }) {
+    const { id } = useParams()
     const [center, setCenter] = useState({ lat: -11.2135241, lng: 17.8770032 });
+    const [PopupDescri, setPopoutDescri] = useState('')
     const [positionAlojamento, setPositionAlojamento] = useState({ lat: -11.2135241, lng: 17.8770032 })
-    useEffect(() => {
+    /*useEffect(() => {
         if (localStorage.hasOwnProperty("latitude") && localStorage.hasOwnProperty("longitude")) {
 
-            console.log('ola1')
+
             const lati = localStorage.getItem("latitude")
             const long = localStorage.getItem("longitude")
-            if ((typeof (dadosmapa.latitude) !== undefined) && lati !== dadosmapa.latitude && long !== dadosmapa.longitude) {
+            if ((typeof (dadosmapa.latitude) !== 'undefined') && lati !== dadosmapa.latitude && long !== dadosmapa.longitude) {
                 localStorage.setItem('latitude', dadosmapa.latitude)
                 localStorage.setItem('longitude', dadosmapa.longitude)
                 setPositionAlojamento({ lat: dadosmapa.latitude, lng: dadosmapa.longitude })
 
             } else {
-                console.log('ola3')
+
                 setPositionAlojamento({
                     lat: lati,
                     lng: long
@@ -31,12 +36,22 @@ export function Mapa({ dadosmapa }) {
             }
 
         } else {
-            console.log('ola4')
+
             localStorage.setItem('latitude', dadosmapa.latitude)
             localStorage.setItem('longitude', dadosmapa.longitude)
             setPositionAlojamento({ lat: dadosmapa.latitude, lng: dadosmapa.longitude })
         }
+    }, [])*/
+    useEffect(() => {
+        console.log(id)
+        api.get(`api.v1/alojamentos/${id}/`).then(res => {
+            //console.log(res.data)
+            setPositionAlojamento({ lat: res.data.latitude, lng: res.data.longitude })
+            setPopoutDescri(res.data.linha)
+        })
+
     }, [])
+    console.log(positionAlojamento)
 
     return (
         <MapContainer
@@ -52,10 +67,12 @@ export function Mapa({ dadosmapa }) {
                     ? center.lng
                     : positionAlojamento.lng
                 ]
-            } >
+            }
+            >
                 <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                    {PopupDescri}
                 </Popup>
+
             </Marker>
 
             <TileLayer

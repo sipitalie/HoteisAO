@@ -1,26 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ImgComp from '../Slideshow/ImgComp';
 import Follow from '../Follow';
 import STAR from '../Star';
 import Atrativos from '../Atrativos';
 
+
 import { FiMapPin } from 'react-icons/fi';
 
 
-import h2 from '../../assets/icon_hotel.jpeg';
+import defaultImg from '../../assets/DefaultImg.png';
 import './Card.css';
 
 export default function Card({ alojamento }) {
+    const history = useHistory()
 
     const goMap = () => {
-        //criar uma requisição ao google map 
+        history.push(`/hotelpage/${alojamento.id}/mapa`)
+
     }
     return (
         <div className="product-card">
             <div className="left-column-img">
-                <ImgComp src={alojamento.foto === null ? h2 : `http://127.0.0.1:8000${alojamento.foto}`} />
+                <ImgComp src={alojamento.foto === null ? defaultImg : `http://127.0.0.1:8000${alojamento.foto}`} />
             </div>
 
             <div className="right-column-inf0">
@@ -45,7 +48,9 @@ export default function Card({ alojamento }) {
                     </h4>
                 </div>
                 <STAR star={alojamento.Estrela} />
-                <Follow idhotel={alojamento.id} />
+                <Follow
+                    owner={alojamento.owner}
+                    idhotel={alojamento.id} />
                 <Atrativos />
             </div>
         </div>
