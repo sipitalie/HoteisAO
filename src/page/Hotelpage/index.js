@@ -150,7 +150,7 @@ export default function HotelPage() {
                             <div>
                                 <div><h3>
                                     Contactos
-                                    {IsAdminHotel(dados.owner) && <Link to={`contactos/${Contactos.id}`}>{' '}<FaPencilAlt color="#521751" size='1rem' /></Link>}
+                                    {IsAdminHotel(dados.owner) && (Contactos !== '') && <Link to={`/contactos/${id}/${Contactos.id}`}>{' '}<FaPencilAlt color="#521751" size='1rem' /></Link>}
                                 </h3>
 
                                 </div>

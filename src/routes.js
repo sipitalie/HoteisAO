@@ -22,6 +22,7 @@ import ChangeEvent from './page/Hotelpage/changeEventos/';
 import { Mapa } from './page/Hotelpage/Mapa/Mapa';
 import ChangePromo from './page/Hotelpage/ChangePromo';
 import ChangeBadroon from './page/Hotelpage/ChangeBadroon';
+import UpdateContactos from './components/CreateContacts/ChangeContacts';
 
 
 function PrivateRoute({ component: Component, ...rest }) {
@@ -76,6 +77,7 @@ const Routes = () => (
         <PrivateRoute path='/evento/:idhotel/:id/' component={ChangeEvent} />
         <PrivateRoute path='/promo/:idhotel/:id/' component={ChangePromo} />
         <PrivateRoute path='/quarto/:idhotel/:id/' component={ChangeBadroon} />
+        <PrivateRoute path='/contactos/:idhotel/:id/' component={UpdateContactos} />
         <PrivateRoute path='/upload/image/gallery/quarto/:id' component={SendPhotosToTheBedroomGallery} />
         <PrivateRoute path='/yourlodging' component={OwnerHome} />
 
